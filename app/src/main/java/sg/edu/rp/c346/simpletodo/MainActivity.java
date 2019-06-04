@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -80,9 +81,15 @@ public class MainActivity extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int delint = Integer.parseInt(text.getText().toString());
-                tasks.remove(delint);
-                alltasks.notifyDataSetChanged();
+
+                if (tasks.size()==0){
+                    Toast toast= Toast.makeText(MainActivity.this,"You dont have any tasks to remove",Toast.LENGTH_SHORT);
+                    toast.show();
+                }else {
+                    int delint = Integer.parseInt(text.getText().toString());
+                    tasks.remove(delint);
+                    alltasks.notifyDataSetChanged();
+                }
             }
         });
 
