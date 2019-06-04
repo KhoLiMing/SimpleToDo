@@ -43,18 +43,26 @@ public class MainActivity extends AppCompatActivity {
 
         list.setAdapter(alltasks);
 
+        spn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
 
-        spn.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
                     case 0:
                         delete.setEnabled(false);
+                        add.setEnabled(true);
                         break;
                     case 1:
                         add.setEnabled(false);
+                        delete.setEnabled(true);
                         break;
                 }
+            }
+
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent){
+
             }
 
         });
@@ -74,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int delint = Integer.parseInt(text.getText().toString());
                 tasks.remove(delint);
+                alltasks.notifyDataSetChanged();
             }
         });
 
